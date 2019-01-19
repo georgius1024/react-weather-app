@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`header renders correctly 1`] = `
+<nav
+  aria-label="main navigation"
+  className="navbar"
+  role="navigation"
+>
+  <div
+    className="navbar-brand"
+  >
+    <a
+      className="navbar-item"
+      href="/"
+    >
+      <img
+        alt="logo"
+        className="logo"
+        height="28"
+        src="Weather-PNG-File.png"
+        width="28"
+      />
+      <div
+        className="is-size-4 m-l-3"
+      >
+        Weather App
+      </div>
+    </a>
+  </div>
+</nav>
+`;

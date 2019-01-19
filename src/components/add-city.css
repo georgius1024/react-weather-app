@@ -1,0 +1,18 @@
+.form {
+  padding: 16px;
+}
+.typeahead {
+  padding: 2px;
+}
+
+.typeahead-item {
+  display: block;
+  padding: 2px 0;
+  color: #777;
+  text-decoration: none;
+}
+
+.typeahead-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #777;
+}

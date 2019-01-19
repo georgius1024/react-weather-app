@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddCity renders correctly 1`] = `
+<div
+  className="modal  is-active"
+>
+  <div
+    className="modal-background"
+  />
+  <div
+    className="modal-content has-background-white has-text-black-ter form"
+  >
+    <div
+      className="field"
+    >
+      <label
+        className="label"
+      >
+        City name
+      </label>
+      <div
+        className="control"
+      >
+        <input
+          className="input"
+          onChange={[Function]}
+          placeholder="Enter city name"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <button
+      className="button is-outline"
+      onClick={[Function]}
+    >
+      Add city
+    </button>
+  </div>
+  <button
+    className="modal-close is-large"
+    onClick={[Function]}
+  />
+</div>
+`;

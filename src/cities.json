@@ -1,0 +1,122 @@
+[
+  {
+    "country": "RU",
+    "name": "Moscow",
+    "lat": "55.75222",
+    "lng": "37.61556",
+    "image": "/images/11.jpg",
+    "temperature": "-7",
+    "humidity": "78",
+    "rain": "0",
+    "snow": "10",
+    "cloudiness": "80"
+  },
+  {
+    "country": "IT",
+    "name": "Milan",
+    "lat": "45.46427",
+    "lng": "9.18951",
+    "image": "/images/10.jpg",
+    "temperature": "7",
+    "humidity": "88",
+    "rain": "30",
+    "snow": "0",
+    "cloudiness": "85"
+  },
+  {
+    "country": "RU",
+    "name": "Yekaterinburg",
+    "lat": "56.8519",
+    "lng": "60.6122",
+    "image": "/images/12.jpg",
+    "temperature": "-11",
+    "humidity": "75",
+    "rain": "0",
+    "snow": "50",
+    "cloudiness": "100"
+  },
+  {
+    "country": "RU",
+    "name": "Domodedovo",
+    "lat": "55.4413",
+    "lng": "37.75367",
+    "image": "/images/9.jpg",
+    "temperature": "-7",
+    "humidity": "78",
+    "rain": "0",
+    "snow": "0",
+    "cloudiness": "80"
+  },
+  {
+    "country": "IT",
+    "name": "Pescara",
+    "lat": "42.4584",
+    "lng": "14.20283",
+    "image": "/images/6.jpg",
+    "temperature": "12",
+    "humidity": "88",
+    "rain": "10",
+    "snow": "0",
+    "cloudiness": "55"
+  },
+  {
+    "country": "IT",
+    "name": "Treviso",
+    "lat": "45.66673",
+    "lng": "12.2416",
+    "image": "/images/13.jpg",
+    "temperature": "5",
+    "humidity": "88",
+    "rain": "10",
+    "snow": "0",
+    "cloudiness": "55"
+  },
+  {
+    "country": "IT",
+    "name": "Trieste",
+    "lat": "45.64953",
+    "lng": "13.77678",
+    "image": "/images/23.jpg",
+    "temperature": "3",
+    "humidity": "90",
+    "rain": "50",
+    "snow": "0",
+    "cloudiness": "90"
+  },
+  {
+    "country": "DE",
+    "name": "Munich",
+    "lat": "48.13743",
+    "lng": "11.57549",
+    "image": "/images/14.jpg",
+    "temperature": "3",
+    "humidity": "72",
+    "rain": "10",
+    "snow": "50",
+    "cloudiness": "90"
+  },
+  {
+    "country": "AT",
+    "name": "Vienna",
+    "lat": "48.20849",
+    "lng": "16.37208",
+    "image": "/images/19.jpg",
+    "temperature": "-2",
+    "humidity": "56",
+    "rain": "00",
+    "snow": "00",
+    "cloudiness": "15"
+  },
+  {
+    "country": "RU",
+    "name": "Verkhnyaya Pyshma",
+    "lat": "56.97047",
+    "lng": "60.58219",
+    "image": "/images/18.jpg",
+    "temperature": "-11",
+    "humidity": "75",
+    "rain": "0",
+    "snow": "50",
+    "cloudiness": "100"
+  }
+]
