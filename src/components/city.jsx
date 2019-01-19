@@ -43,7 +43,8 @@ export default class City extends Component {
     if (this.props.city) {
       const url = config.APIXU_URL + 
       '?key=' + config.APIXU_KEY + 
-      '&q=' + encodeURIComponent(this.props.city.name)
+      '&q=' + this.props.city.lat + ',' + this.props.city.lng
+      //'&q=' + encodeURIComponent(this.props.city.name)
       fetch(url)
         .then(response => response.json())
         .then(({current, location}) => {
@@ -83,10 +84,10 @@ export default class City extends Component {
     }
     const current = this.state
     const onRemove = () => {
-      this.props.onRemove(city)
+      this.props.onRemove(city.key)
     }
-    const locationUrl = `https://maps.google.com/?q=${current.lat},${current.lng}`
-    const imageUrl = encodeURI(current.image)
+    const locationUrl = `https://maps.google.com/?q=${city.lat},${city.lng}`
+    const imageUrl = encodeURI(city.image)
     
     const icon = (current.conditionIcon) 
       ? <div><img src={current.conditionIcon} alt={current.conditionDesc} title={current.conditionDesc} /> </div> 
@@ -112,7 +113,18 @@ export default class City extends Component {
             </div>
             <div className="header">
               {city.name}
-              {icon}
+            </div>  
+            <div style={{textAlign: 'center'}}>
+              {
+                (current.conditionIcon) 
+                ? <div>
+                   <img src={current.conditionIcon} alt="conditions" />
+                   <div>{current.conditionDesc}</div>
+                 </div> 
+                : ''
+               
+
+              }
             </div>
             <div className="column">
               <div>Temperature: {current.temperature}°C, feels like {current.feelsLike}°C </div>

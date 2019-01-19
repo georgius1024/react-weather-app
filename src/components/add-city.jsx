@@ -49,10 +49,13 @@ export default class AddCity extends Component {
     if (this.state.typeahead.length > 1) {
         const items = this.state.typeahead.map((item, index) => {
         const onSelect = () => {
-          this.props.onSubmit(item)
+          const city  = {...item}
+          city.key = String(city.name) + '.' + String(city.lat) + '.' + String(city.lng)
+          city.image = '/images/' + Math.ceil(Math.random() * 26) + '.jpg'
+          this.props.onSubmit(city)
         }
         return (
-          <a className="typeahead-item" onClick={onSelect}>
+          <a key={index} className="typeahead-item" onClick={onSelect}>
             {item.name}, {item.country}
           </a>
         )

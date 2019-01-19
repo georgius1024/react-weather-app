@@ -1,30 +1,37 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Header from './components/header'
 import Footer from './components/footer'
 import Cities from './components/cities'
 import City from './components/city'
 import AddCity from './components/add-city'
 import config from './config'
-// import cities from './cities.json'
-const cities = []
+import actions from  './store/actions'
+const {addCityAction, removeCityAction } = actions
 class App extends Component {
   constructor(p, c) {
     super(p, c)
     this.selectCity = this.selectCity.bind(this)
     this.addCity = this.addCity.bind(this)
     this.removeCity = this.removeCity.bind(this)
-    this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.submitCity = this.submitCity.bind(this)
+    const cities = this.props.cities
     this.state = {
-      cities: [...cities],
       selectedCity: cities[0],
       modalActive: false,
     }
   }
+
+  componentDidMount() {
+    if (this.props.cities.length === 0) {
+      this.addCity()
+    }
+  }
+
   render() {
     const selectedCity = this.state.selectedCity
-    const cities = this.state.cities
+    const cities = this.props.cities
     const modalActive = this.state.modalActive
     return (
       <div>
@@ -58,33 +65,27 @@ class App extends Component {
       selectedCity: city,
     })
   }
-  removeCity(city) {
-    const cities = this.state.cities.filter(e => e.name !== city.name)
-    this.setState({
-      cities,
-    })
-    if (cities.length > 0) {
-      this.selectCity(cities[0])
+  removeCity(key) {
+    const currentCityIndex = this.props.cities.findIndex(e => e.key === key)
+    this.props.removeCity(key)
+    if (currentCityIndex === this.props.cities.length - 1) {
+      this.selectCity(this.props.cities[currentCityIndex - 1])
     } else {
-      this.selectCity()
+      this.selectCity(this.props.cities[currentCityIndex + 1])
+    }
+    if (this.props.cities.length === 1) {
+      this.addCity()
     }
   }
   addCity() {
-    this.openModal()
-  }
-  submitCity(city) {
-    this.closeModal()
-    const cities = [...this.state.cities]
-    cities.push(city)
-    this.setState({
-      cities,
-    })
-    this.selectCity(city)
-  }
-  openModal() {
     this.setState({
       modalActive: true,
     })
+  }
+  submitCity(city) {
+    this.closeModal()
+    this.props.addCity(city)
+    this.selectCity(city)
   }
   closeModal() {
     this.setState({
@@ -93,4 +94,19 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    cities: state
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCity: (city) => dispatch(addCityAction(city)),
+    removeCity: (key) => dispatch(removeCityAction(key))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

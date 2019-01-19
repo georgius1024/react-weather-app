@@ -11,7 +11,7 @@ export default props => {
       const onclick = () => {
         props.onselect(city)
       }
-      const isSelected = props.selected.name === city.name
+      const isSelected = props.selected && props.selected.name === city.name
       return (
         <li key={index}>
           <a
