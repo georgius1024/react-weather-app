@@ -16,7 +16,7 @@ export default class City extends Component {
       pressure: 'N/A',
       conditionIcon: false,
       conditionDesc: 'N/A',
-      localTime: 'N/A'
+      localTime: 'N/A',
     } 
   }
 
@@ -40,36 +40,53 @@ export default class City extends Component {
     }
   }  
   requestApi() {
-    const url = config.APIXU_URL + 
-    '?key=' + config.APIXU_KEY + 
-    '&q=' + encodeURIComponent(this.props.city.name)
-    fetch(url)
-      .then(response => response.json())
-      .then(({current, location}) => {
-        const [date, time] = location.localtime.split(' ')
-        console.log(current)
-        this.setState({
-          temperature: current.temp_c,
-          feelsLike: current.feelslike_c,
-          cloud: current.cloud,
-          wind: (current.wind_kph * 0.277778).toFixed(1),
-          direction: current.wind_dir,
-          pressure: (current.pressure_mb * 0.750062).toFixed(0),
-          conditionIcon: current.condition.icon,
-          conditionDesc: current.condition.text,
-          humidity: current.humidity,
-          localTime: time
+    if (this.props.city) {
+      const url = config.APIXU_URL + 
+      '?key=' + config.APIXU_KEY + 
+      '&q=' + encodeURIComponent(this.props.city.name)
+      fetch(url)
+        .then(response => response.json())
+        .then(({current, location}) => {
+          const [date, time] = location.localtime.split(' ')
+          console.log(current)
+          this.setState({
+            temperature: current.temp_c,
+            feelsLike: current.feelslike_c,
+            cloud: current.cloud,
+            wind: (current.wind_kph * 0.277778).toFixed(1),
+            direction: current.wind_dir,
+            pressure: (current.pressure_mb * 0.750062).toFixed(0),
+            conditionIcon: current.condition.icon,
+            conditionDesc: current.condition.text,
+            humidity: current.humidity,
+            localTime: time
+          })
         })
-      })
+    }
   }
   render () {
     const city = this.props.city
+    if (!city) {
+      return (
+        <div className="city">
+        <div className="city-inner">
+          <div className="city-canvas">
+            <div className="header">
+              No city selected!
+            </div>
+          </div>
+        </div>
+
+        </div>
+        
+      )
+    }
+    const current = this.state
     const onRemove = () => {
       this.props.onRemove(city)
     }
-    const locationUrl = `https://maps.google.com/?q=${city.lat},${city.lng}`
-    const imageUrl = encodeURI(city.image)
-    const current = this.state
+    const locationUrl = `https://maps.google.com/?q=${current.lat},${current.lng}`
+    const imageUrl = encodeURI(current.image)
     
     const icon = (current.conditionIcon) 
       ? <div><img src={current.conditionIcon} alt={current.conditionDesc} title={current.conditionDesc} /> </div> 

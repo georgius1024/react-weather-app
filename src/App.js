@@ -5,7 +5,8 @@ import Cities from './components/cities'
 import City from './components/city'
 import AddCity from './components/add-city'
 import config from './config'
-import cities from './cities.json'
+// import cities from './cities.json'
+const cities = []
 class App extends Component {
   constructor(p, c) {
     super(p, c)
@@ -43,9 +44,9 @@ class App extends Component {
             />
           </div>
           <div className="column is-three-fifths">
-            selectedCity 
-            ? <City city={selectedCity} onRemove={this.removeCity} />
-            : ''
+            {
+              (selectedCity) ? <City city={selectedCity} onRemove={this.removeCity} /> : ''
+            }
           </div>
         </div>
         <Footer config={config} />

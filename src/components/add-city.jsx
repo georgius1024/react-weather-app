@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react'
-import completeCityList from '../db/cities.json'
+import completeCityList from '../db.json'
 import './add-city.css'
 
 export default class AddCity extends Component {
