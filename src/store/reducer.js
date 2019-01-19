@@ -1,9 +1,9 @@
 import consts from './consts'
-function cityReducer (state = [], action) {
+function cityReducer(state = [], action) {
   // eslint-disable-next-line
   switch (action.type) {
     case consts.addCity:
-      const city = {...action.payload}
+      const city = { ...action.payload }
       const cities = [...state].filter(e => e.key !== city.key)
       cities.push(city)
       return cities

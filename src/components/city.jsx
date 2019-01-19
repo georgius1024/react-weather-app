@@ -17,7 +17,7 @@ export default class City extends Component {
       conditionIcon: false,
       conditionDesc: 'N/A',
       localTime: 'N/A',
-    } 
+    }
   }
 
   static shouldComponentUpdate(nextProps, prevState) {
@@ -25,11 +25,11 @@ export default class City extends Component {
     if (nextProps.city.name !== this.props.city.name) {
       this.requestApi(nextProps.city.name)
       return true
-    } 
+    }
     return false
-  }  
+  }
 
-  componentDidMount () {
+  componentDidMount() {
     this.requestApi()
   }
 
@@ -38,16 +38,21 @@ export default class City extends Component {
     if (prevProps.city.name !== this.props.city.name) {
       this.requestApi()
     }
-  }  
+  }
   requestApi() {
     if (this.props.city) {
-      const url = config.APIXU_URL + 
-      '?key=' + config.APIXU_KEY + 
-      '&q=' + this.props.city.lat + ',' + this.props.city.lng
+      const url =
+        config.APIXU_URL +
+        '?key=' +
+        config.APIXU_KEY +
+        '&q=' +
+        this.props.city.lat +
+        ',' +
+        this.props.city.lng
       //'&q=' + encodeURIComponent(this.props.city.name)
       fetch(url)
         .then(response => response.json())
-        .then(({current, location}) => {
+        .then(({ current, location }) => {
           const [date, time] = location.localtime.split(' ')
           console.log(current)
           this.setState({
@@ -60,26 +65,22 @@ export default class City extends Component {
             conditionIcon: current.condition.icon,
             conditionDesc: current.condition.text,
             humidity: current.humidity,
-            localTime: time
+            localTime: time,
           })
         })
     }
   }
-  render () {
+  render() {
     const city = this.props.city
     if (!city) {
       return (
         <div className="city">
-        <div className="city-inner">
-          <div className="city-canvas">
-            <div className="header">
-              No city selected!
+          <div className="city-inner">
+            <div className="city-canvas">
+              <div className="header">No city selected!</div>
             </div>
           </div>
         </div>
-
-        </div>
-        
       )
     }
     const current = this.state
@@ -88,10 +89,18 @@ export default class City extends Component {
     }
     const locationUrl = `https://maps.google.com/?q=${city.lat},${city.lng}`
     const imageUrl = encodeURI(city.image)
-    
-    const icon = (current.conditionIcon) 
-      ? <div><img src={current.conditionIcon} alt={current.conditionDesc} title={current.conditionDesc} /> </div> 
-      : ''
+
+    const icon = current.conditionIcon ? (
+      <div>
+        <img
+          src={current.conditionIcon}
+          alt={current.conditionDesc}
+          title={current.conditionDesc}
+        />{' '}
+      </div>
+    ) : (
+      ''
+    )
     return (
       <div className="city">
         <div
@@ -111,26 +120,27 @@ export default class City extends Component {
                 Open map
               </a>
             </div>
-            <div className="header">
-              {city.name}
-            </div>  
-            <div style={{textAlign: 'center'}}>
-              {
-                (current.conditionIcon) 
-                ? <div>
-                   <img src={current.conditionIcon} alt="conditions" />
-                   <div>{current.conditionDesc}</div>
-                 </div> 
-                : ''
-               
-
-              }
+            <div className="header">{city.name}</div>
+            <div style={{ textAlign: 'center' }}>
+              {current.conditionIcon ? (
+                <div>
+                  <img src={current.conditionIcon} alt="conditions" />
+                  <div>{current.conditionDesc}</div>
+                </div>
+              ) : (
+                ''
+              )}
             </div>
             <div className="column">
-              <div>Temperature: {current.temperature}°C, feels like {current.feelsLike}°C </div>
+              <div>
+                Temperature: {current.temperature}°C, feels like{' '}
+                {current.feelsLike}°C{' '}
+              </div>
               <div>Himidity: {current.humidity}%</div>
               <div>Pressure: {current.pressure}mmHg</div>
-              <div>Wind: {current.wind}m/s {current.direction}</div>
+              <div>
+                Wind: {current.wind}m/s {current.direction}
+              </div>
               <div>Local time: {current.localTime}</div>
             </div>
           </div>

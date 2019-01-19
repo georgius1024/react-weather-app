@@ -17,7 +17,7 @@ export default class AddCity extends Component {
   onChange(event) {
     this.setValue(event.target.value)
   }
-  
+
   setValue(value) {
     let typeahead = []
     if (value.length > 3) {
@@ -47,10 +47,11 @@ export default class AddCity extends Component {
   render() {
     let typeahead
     if (this.state.typeahead.length > 1) {
-        const items = this.state.typeahead.map((item, index) => {
+      const items = this.state.typeahead.map((item, index) => {
         const onSelect = () => {
-          const city  = {...item}
-          city.key = String(city.name) + '.' + String(city.lat) + '.' + String(city.lng)
+          const city = { ...item }
+          city.key =
+            String(city.name) + '.' + String(city.lat) + '.' + String(city.lng)
           city.image = '/images/' + Math.ceil(Math.random() * 26) + '.jpg'
           this.props.onSubmit(city)
         }
@@ -60,10 +61,7 @@ export default class AddCity extends Component {
           </a>
         )
       })
-      typeahead = (
-      <div className="typeahead">
-        { items }
-      </div>)
+      typeahead = <div className="typeahead">{items}</div>
     }
     const selectEkat = () => {
       this.setValue('ekat')
