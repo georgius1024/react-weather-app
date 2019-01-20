@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { Component } from 'react'
-import completeCityList from '../db.json'
 import './add-city.css'
 
 export default class AddCity extends Component {
@@ -10,8 +9,6 @@ export default class AddCity extends Component {
 
     this.onChange = this.onChange.bind(this)
     this.onClose = this.onClose.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
-    window.completeCityList = completeCityList
   }
 
   onChange(event) {
@@ -19,6 +16,7 @@ export default class AddCity extends Component {
   }
 
   setValue(value) {
+    const completeCityList = this.props.DB
     let typeahead = []
     if (value.length > 3) {
       typeahead = completeCityList
@@ -31,17 +29,6 @@ export default class AddCity extends Component {
 
   onClose() {
     this.props.onClose()
-  }
-
-  onSubmit() {
-    const city = {
-      name: this.state.value,
-      lat: 0,
-      lng: 0,
-      image: '/images/1.jpg',
-    }
-    this.props.onSubmit(city)
-    this.setState({ value: '', typeahead: [] })
   }
 
   render() {
@@ -63,9 +50,6 @@ export default class AddCity extends Component {
       })
       typeahead = <div className="typeahead">{items}</div>
     }
-    const selectEkat = () => {
-      this.setValue('ekat')
-    }
     return (
       <div className={'modal  ' + (this.props.active ? 'is-active' : '')}>
         <div className="modal-background" />
@@ -83,8 +67,6 @@ export default class AddCity extends Component {
               {typeahead}
             </div>
           </div>
-
-          <a onClick={selectEkat}>EKAT</a>
         </div>
         <button className="modal-close is-large" onClick={this.onClose} />
       </div>

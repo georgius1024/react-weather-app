@@ -21,7 +21,6 @@ export default class City extends Component {
   }
 
   static shouldComponentUpdate(nextProps, prevState) {
-    console.log(nextProps)
     if (nextProps.city.name !== this.props.city.name) {
       this.requestApi(nextProps.city.name)
       return true
@@ -49,12 +48,10 @@ export default class City extends Component {
         this.props.city.lat +
         ',' +
         this.props.city.lng
-      //'&q=' + encodeURIComponent(this.props.city.name)
       fetch(url)
         .then(response => response.json())
         .then(({ current, location }) => {
           const [date, time] = location.localtime.split(' ')
-          console.log(current)
           this.setState({
             temperature: current.temp_c,
             feelsLike: current.feelslike_c,

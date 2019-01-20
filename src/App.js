@@ -20,6 +20,8 @@ class App extends Component {
     this.state = {
       selectedCity: cities[0],
       modalActive: false,
+      dbIsLoaded: false,
+      DB: [],
     }
   }
 
@@ -32,10 +34,12 @@ class App extends Component {
   render() {
     const selectedCity = this.state.selectedCity
     const cities = this.props.cities
+    const DB = this.state.DB
     const modalActive = this.state.modalActive
     return (
       <div>
         <AddCity
+          DB={DB}
           active={modalActive}
           onClose={this.closeModal}
           onSubmit={this.submitCity}
@@ -78,9 +82,22 @@ class App extends Component {
     }
   }
   addCity() {
-    this.setState({
-      modalActive: true,
-    })
+    if (!this.state.dbIsLoaded) {
+      fetch('/cities.json')
+      .then(response => response.json())
+      .then(DB => {
+        this.setState({
+          DB,
+          dbIsLoaded: true,
+          modalActive: true
+        })
+      })
+    } else {
+      this.setState({
+        modalActive: true
+      })
+  }
+
   }
   submitCity(city) {
     this.closeModal()
