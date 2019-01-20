@@ -6,8 +6,8 @@ import Cities from './components/cities'
 import City from './components/city'
 import AddCity from './components/add-city'
 import config from './config'
-import actions from  './store/actions'
-const {addCityAction, removeCityAction } = actions
+import actions from './store/actions'
+const { addCityAction, removeCityAction } = actions
 class App extends Component {
   constructor(p, c) {
     super(p, c)
@@ -16,7 +16,9 @@ class App extends Component {
     this.removeCity = this.removeCity.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.submitCity = this.submitCity.bind(this)
-    const cities = this.props.cities.sort((a, b) => a.name.localeCompare(b.name))
+    const cities = this.props.cities.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    )
     this.state = {
       selectedCity: cities[0],
       modalActive: false,
@@ -33,7 +35,9 @@ class App extends Component {
 
   render() {
     const selectedCity = this.state.selectedCity
-    const cities = this.props.cities.sort((a, b) => a.name.localeCompare(b.name))
+    const cities = this.props.cities.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    )
 
     const DB = this.state.DB
     const modalActive = this.state.modalActive
@@ -56,9 +60,11 @@ class App extends Component {
             />
           </div>
           <div className="column is-three-fifths">
-            {
-              (selectedCity) ? <City city={selectedCity} onRemove={this.removeCity} /> : ''
-            }
+            {selectedCity ? (
+              <City city={selectedCity} onRemove={this.removeCity} />
+            ) : (
+              ''
+            )}
           </div>
         </div>
         <Footer config={config} />
@@ -85,20 +91,19 @@ class App extends Component {
   addCity() {
     if (!this.state.dbIsLoaded) {
       fetch('/cities.json')
-      .then(response => response.json())
-      .then(DB => {
-        this.setState({
-          DB,
-          dbIsLoaded: true,
-          modalActive: true
+        .then(response => response.json())
+        .then(DB => {
+          this.setState({
+            DB,
+            dbIsLoaded: true,
+            modalActive: true,
+          })
         })
-      })
     } else {
       this.setState({
-        modalActive: true
+        modalActive: true,
       })
-  }
-
+    }
   }
   submitCity(city) {
     this.closeModal()
@@ -112,15 +117,15 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    cities: state
+    cities: state,
   }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    addCity: (city) => dispatch(addCityAction(city)),
-    removeCity: (key) => dispatch(removeCityAction(key))
+    addCity: city => dispatch(addCityAction(city)),
+    removeCity: key => dispatch(removeCityAction(key)),
   }
 }
 

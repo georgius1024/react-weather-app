@@ -7,15 +7,14 @@ exports[`Cities renders correctly 1`] = `
   <p
     className="menu-label"
   >
-    Favorite cities
+    Select city
   </p>
   <ul
     className="menu-list"
   >
     <li>
       <a
-        className="is-active"
-        href="javascript:void(0)"
+        className=""
         onClick={[Function]}
       >
         Moscow
@@ -32,7 +31,7 @@ exports[`Cities renders correctly 1`] = `
   >
     <li>
       <a
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         <span
           className="icon"

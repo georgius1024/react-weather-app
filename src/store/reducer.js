@@ -1,4 +1,3 @@
-
 /* eslint-disable default-case */
 import consts from './consts'
 function cityReducer(state = [], action) {

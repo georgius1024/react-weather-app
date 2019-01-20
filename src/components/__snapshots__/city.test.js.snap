@@ -43,32 +43,43 @@ exports[`City renders correctly 1`] = `
         Moscow
       </div>
       <div
+        style={
+          Object {
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </div>
+      <div
         className="column"
       >
         <div>
           Temperature: 
-          -7
+          N/A
+          °C, feels like
+           
+          N/A
           °C
         </div>
         <div>
           Himidity: 
-          78
           %
         </div>
         <div>
-          Rain prob: 
-          0
-          %
+          Pressure: 
+          N/A
+          mmHg
         </div>
         <div>
-          Snow prob: 
-          10
-          %
+          Wind: 
+          N/A
+          m/s 
+          N/A
         </div>
         <div>
-          Cloudiness: 
-          80
-          %
+          Local time: 
+          N/A
         </div>
       </div>
     </div>

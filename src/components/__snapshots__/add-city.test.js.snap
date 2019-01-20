@@ -16,7 +16,7 @@ exports[`AddCity renders correctly 1`] = `
       <label
         className="label"
       >
-        City name
+        Add city
       </label>
       <div
         className="control"
@@ -28,14 +28,11 @@ exports[`AddCity renders correctly 1`] = `
           type="text"
           value=""
         />
+        <div
+          className="typeahead"
+        />
       </div>
     </div>
-    <button
-      className="button is-outline"
-      onClick={[Function]}
-    >
-      Add city
-    </button>
   </div>
   <button
     className="modal-close is-large"

@@ -5,34 +5,32 @@ import PropTypes from 'prop-types'
 export default class Cities extends Component {
   render() {
     const selectedCity = this.props.selected && this.props.selected.name
-    const cities = this.props.cities
-      .map((city, index) => {
-        const onclick = () => {
-          this.props.onSelect(city)
-        }
-        const isSelected = selectedCity === city.name
-        return (
-          <li key={index}>
-            <a
-              onClick={onclick}
-              className={isSelected ? 'is-active' : ''}
-            >
-              {city.name}
-            </a>
-          </li>
-        )
-      })
+    const cities = this.props.cities.map((city, index) => {
+      const onclick = () => {
+        this.props.onSelect(city)
+      }
+      const isSelected = selectedCity === city.name
+      return (
+        <li key={index}>
+          <a onClick={onclick} className={isSelected ? 'is-active' : ''}>
+            {city.name}
+          </a>
+        </li>
+      )
+    })
     return (
       <aside className="menu">
-        {
-          cities.length ? <p className="menu-label">Select city</p> : ''
-        }
-        
+        {cities.length ? <p className="menu-label">Select city</p> : ''}
+
         <ul className="menu-list">{cities}</ul>
-        {
-          cities.length ? <div className="menu-label"><hr /></div> : ''
-        }
-        
+        {cities.length ? (
+          <div className="menu-label">
+            <hr />
+          </div>
+        ) : (
+          ''
+        )}
+
         <ul className="menu-list">
           <li>
             <a onClick={this.props.onAdd}>
@@ -40,7 +38,7 @@ export default class Cities extends Component {
                 <i className="fas fa-plus" />
               </span>
               Add city
-          </a>
+            </a>
           </li>
         </ul>
       </aside>
@@ -48,7 +46,7 @@ export default class Cities extends Component {
   }
 }
 
-Cities.PropTypes = {
+Cities.propTypes = {
   cities: PropTypes.array.isRequired,
   selected: PropTypes.object.isRequired,
   onAdd: PropTypes.func.isRequired,

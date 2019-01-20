@@ -11,10 +11,10 @@ export default class AddCity extends Component {
     this.onClose = this.onClose.bind(this)
     this.onKeyDown = this.onKeyDown.bind(this)
   }
-  componentDidMount () {
+  componentDidMount() {
     document.addEventListener('keydown', this.onKeyDown)
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     document.removeEventListener('keydown', this.onKeyDown)
   }
   onChange(event) {
@@ -28,9 +28,9 @@ export default class AddCity extends Component {
   setValue(value) {
     let typeahead = []
     if (value.length > 3) {
-      typeahead = this.props.DB
-        .filter(e => e.name.toLowerCase().includes(value.toLowerCase()))
-        .slice(0, 50)
+      typeahead = this.props.DB.filter(e =>
+        e.name.toLowerCase().includes(value.toLowerCase())
+      ).slice(0, 50)
     }
     this.setState({ value, typeahead })
   }
@@ -59,7 +59,7 @@ export default class AddCity extends Component {
       })
       typeahead = <div className="typeahead">{items}</div>
     } else {
-      typeahead = <div className="typeahead"></div>
+      typeahead = <div className="typeahead" />
     }
     return (
       <div className={'modal  ' + (this.props.active ? 'is-active' : '')}>
@@ -85,10 +85,9 @@ export default class AddCity extends Component {
   }
 }
 
-AddCity.PropTypes = {
+AddCity.propTypes = {
   DB: PropTypes.array.isRequired,
   active: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 }
-

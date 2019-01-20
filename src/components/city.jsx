@@ -105,7 +105,8 @@ export default class ViewCity extends Component {
             </div>
             <div className="column">
               <div>
-                Temperature: {current.temperature}°C, feels like {current.feelsLike}°C
+                Temperature: {current.temperature}°C, feels like{' '}
+                {current.feelsLike}°C
               </div>
               <div>Himidity: {current.humidity}%</div>
               <div>Pressure: {current.pressure}mmHg</div>
@@ -129,7 +130,7 @@ export default class ViewCity extends Component {
   }
 }
 
-ViewCity.PropTypes = {
+ViewCity.propTypes = {
   city: PropTypes.object.isRequired,
   onRemove: PropTypes.func.isRequired,
 }

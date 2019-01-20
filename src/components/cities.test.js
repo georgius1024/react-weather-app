@@ -1,3 +1,4 @@
+
 import React from 'react'
 import jest from 'jest-mock'
 import renderer from 'react-test-renderer'
@@ -18,13 +19,19 @@ const cities = [
 ]
 describe('Cities', () => {
   it('renders correctly', () => {
+    const onSelect = jest.fn()
     const onAdd = jest.fn()
-    const selected = cities[0]
+    const selectedCity = cities[0]
     const DOM = renderer.create(
-      <Cities cities={cities} selected={selected} onAdd={onAdd} />
-    )
+      <Cities
+      cities={cities}
+      selectedq={selectedCity}
+      onSelect={onSelect}
+      onAdd={onAdd}
+    />
+)
     const html = JSON.stringify(DOM, null, 2)
-    expect(html).toContain(selected.name)
+    expect(html).toContain(selectedCity.name)
     expect(DOM).toMatchSnapshot()
   })
 })
