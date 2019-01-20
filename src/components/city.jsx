@@ -1,10 +1,11 @@
-/* eslint-disable */
-
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-no-target-blank */
 import React, { Component } from 'react'
 import config from '../config'
+import PropTypes from 'prop-types'
 import './city.css'
 
-export default class City extends Component {
+export default class ViewCity extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,7 +20,6 @@ export default class City extends Component {
       localTime: 'N/A',
     }
   }
-
   static shouldComponentUpdate(nextProps, prevState) {
     if (nextProps.city.name !== this.props.city.name) {
       this.requestApi(nextProps.city.name)
@@ -27,11 +27,9 @@ export default class City extends Component {
     }
     return false
   }
-
   componentDidMount() {
     this.requestApi()
   }
-
   componentDidUpdate(prevProps, prevState, snapshot) {
     // Оптимизация, а без нее - бесконечный цикл запросов
     if (prevProps.city.name !== this.props.city.name) {
@@ -51,14 +49,14 @@ export default class City extends Component {
       fetch(url)
         .then(response => response.json())
         .then(({ current, location }) => {
-          const [date, time] = location.localtime.split(' ')
+          const time = location.localtime.split(' ')[1]
           this.setState({
             temperature: current.temp_c,
             feelsLike: current.feelslike_c,
             cloud: current.cloud,
-            wind: (current.wind_kph * 0.277778).toFixed(1),
+            wind: (current.wind_kph * 0.277778).toFixed(1), // km/h -> m/s
             direction: current.wind_dir,
-            pressure: (current.pressure_mb * 0.750062).toFixed(0),
+            pressure: (current.pressure_mb * 0.750062).toFixed(0), // bar -> mmHg
             conditionIcon: current.condition.icon,
             conditionDesc: current.condition.text,
             humidity: current.humidity,
@@ -69,35 +67,12 @@ export default class City extends Component {
   }
   render() {
     const city = this.props.city
-    if (!city) {
-      return (
-        <div className="city">
-          <div className="city-inner">
-            <div className="city-canvas">
-              <div className="header">No city selected!</div>
-            </div>
-          </div>
-        </div>
-      )
-    }
     const current = this.state
     const onRemove = () => {
       this.props.onRemove(city.key)
     }
     const locationUrl = `https://maps.google.com/?q=${city.lat},${city.lng}`
     const imageUrl = encodeURI(city.image)
-
-    const icon = current.conditionIcon ? (
-      <div>
-        <img
-          src={current.conditionIcon}
-          alt={current.conditionDesc}
-          title={current.conditionDesc}
-        />{' '}
-      </div>
-    ) : (
-      ''
-    )
     return (
       <div className="city">
         <div
@@ -130,8 +105,7 @@ export default class City extends Component {
             </div>
             <div className="column">
               <div>
-                Temperature: {current.temperature}°C, feels like{' '}
-                {current.feelsLike}°C{' '}
+                Temperature: {current.temperature}°C, feels like {current.feelsLike}°C
               </div>
               <div>Himidity: {current.humidity}%</div>
               <div>Pressure: {current.pressure}mmHg</div>
@@ -153,4 +127,9 @@ export default class City extends Component {
       </div>
     )
   }
+}
+
+ViewCity.PropTypes = {
+  city: PropTypes.object.isRequired,
+  onRemove: PropTypes.func.isRequired,
 }

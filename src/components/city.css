@@ -17,7 +17,6 @@
 }
 
 .city-inner .city-canvas {
-  border-radius: 8px;
   margin: 32px;
   padding: 32px;
   color: rgba(255, 255, 255, 0.6);
@@ -36,7 +35,7 @@
 
 .removeControl {
   background-color: rgba(0, 0, 0, 0.8);
-  margin-top: auto;
+  margin: 0 32px;
   align-self: flex-end;
 }
 

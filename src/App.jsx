@@ -16,7 +16,7 @@ class App extends Component {
     this.removeCity = this.removeCity.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.submitCity = this.submitCity.bind(this)
-    const cities = this.props.cities
+    const cities = this.props.cities.sort((a, b) => a.name.localeCompare(b.name))
     this.state = {
       selectedCity: cities[0],
       modalActive: false,
@@ -33,7 +33,8 @@ class App extends Component {
 
   render() {
     const selectedCity = this.state.selectedCity
-    const cities = this.props.cities
+    const cities = this.props.cities.sort((a, b) => a.name.localeCompare(b.name))
+
     const DB = this.state.DB
     const modalActive = this.state.modalActive
     return (
@@ -50,7 +51,7 @@ class App extends Component {
             <Cities
               cities={cities}
               selected={selectedCity}
-              onselect={this.selectCity}
+              onSelect={this.selectCity}
               onAdd={this.addCity}
             />
           </div>

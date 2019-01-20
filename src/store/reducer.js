@@ -1,6 +1,7 @@
+
+/* eslint-disable default-case */
 import consts from './consts'
 function cityReducer(state = [], action) {
-  // eslint-disable-next-line
   switch (action.type) {
     case consts.addCity:
       const city = { ...action.payload }
@@ -13,9 +14,10 @@ function cityReducer(state = [], action) {
   return state
 }
 
-function wrapper(reducer, key) {
+function withPersistence(reducer, key) {
+  let stateRestored = false
   return (state, action) => {
-    if (typeof state === 'undefined') {
+    if (!stateRestored) {
       const stored = localStorage.getItem(key)
       if (stored) {
         try {
@@ -24,6 +26,7 @@ function wrapper(reducer, key) {
           state = undefined
         }
       }
+      stateRestored = true
     }
     const newState = reducer(state, action)
     localStorage.setItem(key, JSON.stringify(newState))
@@ -31,4 +34,4 @@ function wrapper(reducer, key) {
   }
 }
 
-export default wrapper(cityReducer, 'cities')
+export default withPersistence(cityReducer, 'cities')
