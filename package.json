@@ -2,7 +2,7 @@
   "name": "React weather app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://geogius1024.github.io/react-weather-app"
+  "homepage": "https://geogius1024.github.io/react-weather-app",
   "dependencies": {
     "bulma": "^0.7.2",
     "prop-types": "^15.6.2",
